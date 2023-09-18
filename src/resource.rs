@@ -157,12 +157,12 @@ mod tests {
     fn rng_untyped_serialization() {
         use bevy::reflect::{
             serde::{ReflectSerializer, UntypedReflectDeserializer},
-            TypeRegistryInternal,
+            TypeRegistry,
         };
         use ron::ser::to_string;
         use serde::de::DeserializeSeed;
 
-        let mut registry = TypeRegistryInternal::default();
+        let mut registry = TypeRegistry::default();
         registry.register::<GlobalEntropy<ChaCha8Rng>>();
 
         let mut val = GlobalEntropy::<ChaCha8Rng>::from_seed([7; 32]);
@@ -205,12 +205,12 @@ mod tests {
     fn rng_typed_serialization() {
         use bevy::reflect::{
             serde::{TypedReflectDeserializer, TypedReflectSerializer},
-            GetTypeRegistration, TypeRegistryInternal,
+            GetTypeRegistration, TypeRegistry,
         };
         use ron::to_string;
         use serde::de::DeserializeSeed;
 
-        let mut registry = TypeRegistryInternal::default();
+        let mut registry = TypeRegistry::default();
         registry.register::<GlobalEntropy<ChaCha8Rng>>();
 
         let registered_type = GlobalEntropy::<ChaCha8Rng>::get_type_registration();
